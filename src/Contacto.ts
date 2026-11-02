@@ -3,7 +3,7 @@ export class Contacto {
     readonly direccion: string;
     
     constructor (nombre:string, direccion:string){
-        this.nombre= nombre.trim().toLowerCase();
+        this.nombre= nombre;
         this.direccion= direccion.trim().toLowerCase();
     }
 }
