@@ -5,9 +5,11 @@ export class Contacto {
     readonly direccion: string;
     
     constructor (nombre:string, direccion:string){
-        this.nombre= nombre;
+        this.nombre= nombre.trim();
         this.direccion= direccion.trim().toLowerCase();
+        Validacion.validar(this.nombre!=="", "el nombre esta vacio");    
         Validacion.validar(this.direccion.includes("@"), "Falta el arroba en la direccion");
         Validacion.validar(this.direccion.includes("."), "Falta el punto en la direccion");     
+
     }
 }

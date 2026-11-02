@@ -21,7 +21,12 @@ describe("Contacto", () =>{
      expect (()=> new Contacto("Sofia", " Sofia@gmailcom ")).toThrow();
       });
 
-    
+    //contacto con nombre vacio//
+      it("rechazar un contacto con nombre vacio", () => {
+     expect (()=> new Contacto("", "sofia@gmail.com")).toThrow();
+     expect (()=> new Contacto("  ", "sofia@gmail.com")).toThrow();
+      });
+
 
 
 });
