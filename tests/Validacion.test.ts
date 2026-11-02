@@ -9,5 +9,10 @@ describe("Validacion", () =>{
      it ("Da un error si la condicion es falsa",() =>{
         expect (()=> Validacion.validar(false, "El email no es valido")).toThrow();
     });
+    
+     it ("Da un mensaje del error",() =>{
+        expect (()=> Validacion.validar(false, "El nombre es obligatorio")).toThrow("El nombre es obligatorio");
+    });
+     
 });
 
