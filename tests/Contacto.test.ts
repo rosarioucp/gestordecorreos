@@ -27,6 +27,18 @@ describe("Contacto", () =>{
      expect (()=> new Contacto("  ", "sofia@gmail.com")).toThrow();
       });
 
+    //creacion de contacto//
+    it("Compara dos contactos con la misma direccion", () => {
+    const contacto1 = new Contacto("Sofia", "sofia@gmail.com");
+    const contacto2 = new Contacto("Laura", "Sofia@gmail.com");
+    expect( contacto1.mismoContacto(contacto2 )).toBe(true);
 
+    });
 
+    it("Compara dos contactos con el mismo nombre", () => {
+    const contacto1 = new Contacto("Sofia", "sofia@gmail.com");
+    const contacto2 = new Contacto("Sofia", "gomez@gmail.com");
+    expect( contacto1.mismoContacto(contacto2 )).toBe(false);
+
+    });
 });
