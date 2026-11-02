@@ -15,5 +15,13 @@ describe("Contacto", () =>{
     expect(contacto.direccion).toBe("sofia@gmail.com");
     });
 
+    //contacto con direccion invalida//
+      it("rechazar un contacto con direccion invalida", () => {
+     expect (()=> new Contacto("Sofia", " Sofia.gmail.com ")).toThrow();
+     expect (()=> new Contacto("Sofia", " Sofia@gmailcom ")).toThrow();
+      });
+
+    
+
 
 });
