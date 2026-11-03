@@ -55,4 +55,16 @@ describe("GestorDeCorreos", () => {
     expect(gestor.verBorradores()).toEqual([correo]);
     expect(gestor.verEnviados()).toEqual([]);
   });
+
+  it("Rechaza un envio sin remitente y conserva el borrador", () => {
+    const gestor = new GestorDeCorreos();
+    const destinatario = new Contacto("Belén", "belen@ucp.edu.ar");
+    const correo = new Correo(undefined, "Consulta", "Que entra en la prueba?");
+    correo.agregarDestinatario(destinatario);
+    gestor.guardarBorrador(correo);
+
+    expect(() => gestor.enviar(correo)).toThrow("Ingrese un remitente valido");
+    expect(gestor.verBorradores()).toEqual([correo]);
+    expect(gestor.verEnviados()).toEqual([]);
+  });
 });
