@@ -7,10 +7,12 @@ export class GestorDeCorreos {
   private _enviados = new Bandeja("Enviados");
 
   guardarBorrador(correo: Correo): void {
+    Validacion.validar(!this._enviados.contiene(correo), "El correo ya fue enviado");
     this._borradores.agregar(correo);
   }
 
   enviar(correo: Correo): void {
+    Validacion.validar(!this._enviados.contiene(correo), "El correo ya fue enviado");
     Validacion.validar(correo.remitente !== undefined, "Ingrese un remitente valido");
     Validacion.validar(correo.asunto.trim() !== "", "Ingrese un asunto valido");
     Validacion.validar(correo.verDestinatarios().length > 0, "Ingrese al menos un destinatario");
