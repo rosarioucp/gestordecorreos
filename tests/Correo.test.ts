@@ -55,4 +55,18 @@ describe("Correo", () => {
 
     expect(correo.verDestinatarios()).toEqual([belen]);
   });
+
+  it("Modificar la lista consultada no cambia los destinatarios del correo", () => {
+    const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const belen = new Contacto("Belén", "belen@ucp.edu.ar");
+    const ian = new Contacto("Ian", "ian@ucp.edu.ar");
+    const correo = new Correo(remitente, "Consulta", "Que entra en la prueba?");
+    correo.agregarDestinatario(belen);
+
+    const destinatarios = correo.verDestinatarios();
+    destinatarios.pop();
+    destinatarios.push(ian);
+
+    expect(correo.verDestinatarios()).toEqual([belen]);
+  });
 });
