@@ -9,6 +9,11 @@ export class GestorDeCorreos {
     this._borradores.agregar(correo);
   }
 
+  enviar(correo: Correo): void {
+    this._borradores.quitar(correo);
+    this._enviados.agregar(correo);
+  }
+
   verBorradores(): Correo[] {
     return this._borradores.verCorreos();
   }
