@@ -19,7 +19,8 @@ export class Correo {
   }
 
   agregarDestinatario(contacto: Contacto): void {
-    this._destinatarios.push(contacto);
+    const existe = this._destinatarios.some(guardado => guardado.direccion === contacto.direccion);
+    !existe && this._destinatarios.push(contacto);
   }
 
   verDestinatarios(): Contacto[] {
