@@ -12,6 +12,7 @@ export class GestorDeCorreos {
 
   enviar(correo: Correo): void {
     Validacion.validar(correo.asunto.trim() !== "", "Ingrese un asunto valido");
+    Validacion.validar(correo.verDestinatarios().length > 0, "Ingrese al menos un destinatario");
     this._borradores.quitar(correo);
     this._enviados.agregar(correo);
   }
