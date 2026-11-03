@@ -1,5 +1,6 @@
 import { Bandeja } from "./Bandeja";
 import { Correo } from "./Correo";
+import { Validacion } from "./Validacion";
 
 export class GestorDeCorreos {
   private _borradores = new Bandeja("Borradores");
@@ -10,6 +11,7 @@ export class GestorDeCorreos {
   }
 
   enviar(correo: Correo): void {
+    Validacion.validar(correo.asunto.trim() !== "", "Ingrese un asunto valido");
     this._borradores.quitar(correo);
     this._enviados.agregar(correo);
   }
