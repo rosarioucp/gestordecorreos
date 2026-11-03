@@ -67,4 +67,18 @@ describe("GestorDeCorreos", () => {
     expect(gestor.verBorradores()).toEqual([correo]);
     expect(gestor.verEnviados()).toEqual([]);
   });
+
+  it("No permite reenviar ni guardar como borrador un correo enviado", () => {
+    const gestor = new GestorDeCorreos();
+    const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const destinatario = new Contacto("Belén", "belen@ucp.edu.ar");
+    const correo = new Correo(remitente, "Consulta", "Que entra en la prueba?");
+    correo.agregarDestinatario(destinatario);
+    gestor.enviar(correo);
+
+    expect(() => gestor.enviar(correo)).toThrow("El correo ya fue enviado");
+    expect(() => gestor.guardarBorrador(correo)).toThrow("El correo ya fue enviado");
+    expect(gestor.verEnviados()).toEqual([correo]);
+    expect(gestor.verBorradores()).toEqual([]);
+  });
 });
