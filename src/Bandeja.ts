@@ -9,7 +9,8 @@ export class Bandeja {
   }
 
   agregar(correo: Correo): void {
-    this._correos.push(correo);
+    const existe = this._correos.some(guardado => guardado.id === correo.id);
+    !existe && this._correos.push(correo);
   }
 
   verCorreos(): Correo[] {
