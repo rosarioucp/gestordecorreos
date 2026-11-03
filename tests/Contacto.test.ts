@@ -14,7 +14,7 @@ describe("Contacto", () =>{
     const contacto = new Contacto("Sofia", " Sofia@gmail.com ");
     expect(contacto.direccion).toBe("sofia@gmail.com");
     });
-
+    
     //contacto con direccion invalida//
     it("rechazar un contacto con direccion invalida", () => {
      expect (()=> new Contacto("Sofia", " Sofia.gmail.com ")).toThrow();

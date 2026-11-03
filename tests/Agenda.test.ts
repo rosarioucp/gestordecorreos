@@ -16,8 +16,7 @@ describe("Agenda", () =>{
     agenda.agregarContacto(new Contacto("Sofia", "sofia@gmail.com"));
     agenda.agregarContacto(new Contacto("Laura", "laura@gmail.com"));
     agenda.agregarContacto(new Contacto("Juan", "juan@gmail.com"));
-
     expect(agenda.buscarContacto("laura@gmail.com")?.nombre).toBe("Laura");
-});
+    });
 
 });
