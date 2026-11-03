@@ -9,8 +9,15 @@ export class Bandeja {
   }
 
   agregar(correo: Correo): void {
-    const existe = this._correos.some(guardado => guardado.id === correo.id);
-    !existe && this._correos.push(correo);
+    !this.contiene(correo) && this._correos.push(correo);
+  }
+
+  contiene(correo: Correo): boolean {
+    return this._correos.some(guardado => guardado.id === correo.id);
+  }
+
+  quitar(correo: Correo): void {
+    this._correos = this._correos.filter(guardado => guardado.id !== correo.id);
   }
 
   verCorreos(): Correo[] {
