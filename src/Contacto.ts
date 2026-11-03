@@ -13,9 +13,10 @@ export class Contacto {
         Validacion.validar(this.direccion.includes("."), "Falta el punto en la direccion"); 
         
     }
- mismoContacto(otroContacto: Contacto):boolean{
-  return this.direccion === otroContacto.direccion;
-  }
+    
+    mismoContacto(otroContacto: Contacto):boolean{
+    return this.direccion === otroContacto.direccion;
+    }
         
 
 }
