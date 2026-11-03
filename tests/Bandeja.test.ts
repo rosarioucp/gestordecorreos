@@ -13,4 +13,15 @@ describe("Bandeja", () => {
 
     expect(bandeja.verCorreos()).toEqual([correo]);
   });
+
+  it("No guarda dos veces el mismo correo", () => {
+    const bandeja = new Bandeja("Borradores");
+    const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const correo = new Correo(remitente, "Consulta", "Que entra en la prueba?");
+
+    bandeja.agregar(correo);
+    bandeja.agregar(correo);
+
+    expect(bandeja.verCorreos()).toEqual([correo]);
+  });
 });
