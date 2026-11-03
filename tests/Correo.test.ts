@@ -43,4 +43,16 @@ describe("Correo", () => {
     expect(correoIan.remitente).toBe(ian);
     expect(correoIan.verDestinatarios()).toEqual([fabricio]);
   });
+
+  it("No agrega destinatarios con la misma direccion", () => {
+    const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const belen = new Contacto("Belén", "belen@ucp.edu.ar");
+    const mismaDireccion = new Contacto("Otro nombre", " BELEN@ucp.edu.ar ");
+    const correo = new Correo(remitente, "Consulta", "Que entra en la prueba?");
+
+    correo.agregarDestinatario(belen);
+    correo.agregarDestinatario(mismaDireccion);
+
+    expect(correo.verDestinatarios()).toEqual([belen]);
+  });
 });
