@@ -4,14 +4,14 @@ export class Correo {
   private static _siguienteId = 1;
 
   readonly id: number;
-  readonly remitente: Contacto;
+  readonly remitente: Contacto | undefined;
   readonly asunto: string;
   readonly cuerpo: string;
   private _destinatarios: Contacto[] = [];
   private _leido = false;
   private _favorito = false;
 
-  constructor(remitente: Contacto, asunto: string, cuerpo: string) {
+  constructor(remitente: Contacto | undefined, asunto: string, cuerpo: string) {
     this.id = Correo._siguienteId++;
     this.remitente = remitente;
     this.asunto = asunto;
