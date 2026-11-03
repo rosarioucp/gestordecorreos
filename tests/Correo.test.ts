@@ -25,4 +25,22 @@ describe("Correo", () => {
 
     expect(primero.id).not.toBe(segundo.id);
   });
+
+  it("Permite crear correos con diferentes remitentes y destinatarios", () => {
+    const fabricio = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const belen = new Contacto("Belén", "belen@ucp.edu.ar");
+    const ian = new Contacto("Ian", "ian@ucp.edu.ar");
+
+    const correoFabricio = new Correo(fabricio, "Consulta", "Pinta juntarnos a estudiar?");
+    correoFabricio.agregarDestinatario(belen);
+    correoFabricio.agregarDestinatario(ian);
+
+    const correoIan = new Correo(ian, "Respuesta", "Banco");
+    correoIan.agregarDestinatario(fabricio);
+
+    expect(correoFabricio.remitente).toBe(fabricio);
+    expect(correoFabricio.verDestinatarios()).toEqual([belen, ian]);
+    expect(correoIan.remitente).toBe(ian);
+    expect(correoIan.verDestinatarios()).toEqual([fabricio]);
+  });
 });
