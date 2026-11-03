@@ -13,7 +13,16 @@ describe("Correo", () => {
     expect(correo.asunto).toBe("Consulta");
     expect(correo.cuerpo).toBe("Que entra en la prueba?");
     expect(correo.verDestinatarios()).toEqual([destinatario]);
+    expect(correo.id).toBeDefined();
     expect(correo.leido).toBe(false);
     expect(correo.favorito).toBe(false);
+  });
+
+  it("Dos correos tienen identificadores distintos aunque tengan el mismo contenido", () => {
+    const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const primero = new Correo(remitente, "Consulta", "Que entra en la prueba?");
+    const segundo = new Correo(remitente, "Consulta", "Que entra en la prueba?");
+
+    expect(primero.id).not.toBe(segundo.id);
   });
 });
