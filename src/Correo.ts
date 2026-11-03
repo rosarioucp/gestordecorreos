@@ -1,0 +1,32 @@
+import { Contacto } from "./Contacto";
+
+export class Correo {
+  readonly remitente: Contacto;
+  readonly asunto: string;
+  readonly cuerpo: string;
+  private _destinatarios: Contacto[] = [];
+  private _leido = false;
+  private _favorito = false;
+
+  constructor(remitente: Contacto, asunto: string, cuerpo: string) {
+    this.remitente = remitente;
+    this.asunto = asunto;
+    this.cuerpo = cuerpo;
+  }
+
+  agregarDestinatario(contacto: Contacto): void {
+    this._destinatarios.push(contacto);
+  }
+
+  verDestinatarios(): Contacto[] {
+    return [...this._destinatarios];
+  }
+
+  get leido(): boolean {
+    return this._leido;
+  }
+
+  get favorito(): boolean {
+    return this._favorito;
+  }
+}
