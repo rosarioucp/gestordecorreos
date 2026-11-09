@@ -19,4 +19,14 @@ describe("Agenda", () =>{
     expect(agenda.buscarContacto("laura@gmail.com")?.nombre).toBe("Laura");
     });
 
+    it("Devuelve undefined si no encuentra el contacto", () => {
+    const agenda = new Agenda();
+    agenda.agregarContacto(new Contacto("Sofia", "sofia@gmail.com"));
+    agenda.agregarContacto(new Contacto("Laura", "laura@gmail.com"));
+    agenda.agregarContacto(new Contacto("Juan", "juan@gmail.com"));
+    expect(agenda.buscarContacto("pedro@gmail.com")).toBeUndefined();
+    });
+
+
+
 });
