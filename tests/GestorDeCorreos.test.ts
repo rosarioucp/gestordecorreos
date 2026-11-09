@@ -4,6 +4,18 @@ import { Correo } from "../src/Correo";
 import { GestorDeCorreos } from "../src/GestorDeCorreos";
 
 describe("GestorDeCorreos", () => {
+  it("Recibe un correo y permite consultarlo en Entrada", () => {
+    const gestor = new GestorDeCorreos();
+    const belen = new Contacto("Belén", "belen@ucp.edu.ar");
+    const fabricio = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const correo = new Correo(belen, "Parcial del viernes", "Que entra en el parcial?");
+    correo.agregarDestinatario(fabricio);
+
+    gestor.recibirCorreo(correo);
+
+    expect(gestor.verEntrada()).toEqual([correo]);
+  });
+
   it("Guarda un correo incompleto como borrador", () => {
     const gestor = new GestorDeCorreos();
     const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
