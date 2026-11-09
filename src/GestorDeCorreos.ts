@@ -3,8 +3,13 @@ import { Correo } from "./Correo";
 import { Validacion } from "./Validacion";
 
 export class GestorDeCorreos {
+  private readonly _entrada = new Bandeja("Entrada");
   private _borradores = new Bandeja("Borradores");
   private _enviados = new Bandeja("Enviados");
+
+  recibirCorreo(correo: Correo): void {
+    this._entrada.agregar(correo);
+  }
 
   guardarBorrador(correo: Correo): void {
     Validacion.validar(!this._enviados.contiene(correo), "El correo ya fue enviado");
@@ -18,6 +23,10 @@ export class GestorDeCorreos {
     Validacion.validar(correo.verDestinatarios().length > 0, "Ingrese al menos un destinatario");
     this._borradores.quitar(correo);
     this._enviados.agregar(correo);
+  }
+
+  verEntrada(): Correo[] {
+    return this._entrada.verCorreos();
   }
 
   verBorradores(): Correo[] {
