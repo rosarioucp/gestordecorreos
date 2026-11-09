@@ -1,6 +1,7 @@
 import {describe, it, expect } from "vitest";
 import {Contacto} from "../src/Contacto";
 import {Agenda} from "../src/Agenda";
+import {Correo} from "../src/Correo";
 
 describe("Agenda", () =>{ 
     //creacion de agenda, agrega contacto//
@@ -55,5 +56,14 @@ describe("Agenda", () =>{
 
     expect(agenda.buscarContacto("sofia@gmail.com")).toBeUndefined();
     expect(agenda.buscarContacto("sofiaperez@gmail.com")?.nombre).toBe("Sofia Perez");
-});
+    });
+
+    it("eliminar un contacto no borra los correos que lo tienen como remitente", () => {
+    const agenda = new Agenda();
+    const sofia = new Contacto("Sofia", "sofia@gmail.com");
+    agenda.agregarContacto(sofia);
+    const correo = new Correo(sofia, "Hola", "Nos vemos mañana");
+    agenda.eliminarContacto("sofia@gmail.com");
+    expect(correo.remitente?.direccion).toBe("sofia@gmail.com");
+    });
 });
