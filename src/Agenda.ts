@@ -22,5 +22,18 @@ export class Agenda {
     const cantidadAntes = this.contactos.length;
     this.contactos = this.contactos.filter(contacto => contacto.direccion !== direccion);
     return this.contactos.length < cantidadAntes;
-}
+    }
+
+    modificarContacto(direccionActual: string, nuevoNombre: string, nuevaDireccion: string): void {
+    const existe = this.buscarContacto(direccionActual) !== undefined;
+    Validacion.validar(existe, "No existe un contacto con esa direccion");
+
+    const nuevo = new Contacto(nuevoNombre, nuevaDireccion);
+
+    const ocupada = this.contactos.some(c => c.mismoContacto(nuevo) && c.direccion !== direccionActual);
+    Validacion.validar(!ocupada, "Ya existe otro contacto con esa direccion");
+
+    this.eliminarContacto(direccionActual);
+    this.contactos.push(nuevo);
+    }   
 }   
