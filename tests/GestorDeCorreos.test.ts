@@ -27,6 +27,18 @@ describe("GestorDeCorreos", () => {
     expect(gestor.verEnviados()).toEqual([]);
   });
 
+  it("Mueve un borrador a Eliminados", () => {
+    const gestor = new GestorDeCorreos();
+    const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const correo = new Correo(remitente, "", "Borrador para Belén");
+    gestor.guardarBorrador(correo);
+
+    gestor.eliminarCorreo(correo);
+
+    expect(gestor.verBorradores()).toEqual([]);
+    expect(gestor.verEliminados()).toEqual([correo]);
+  });
+
   it("Envia un borrador a varios destinatarios y lo mueve a Enviados", () => {
     const gestor = new GestorDeCorreos();
     const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
