@@ -13,4 +13,8 @@ export class Agenda {
     buscarContacto(direccion: string): Contacto | undefined {
         return this.contactos.find(contacto =>contacto.direccion === direccion );
     }
+
+    listarContactos(): Contacto[] {
+    return [...this.contactos];
+}
 }   
