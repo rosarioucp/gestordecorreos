@@ -16,5 +16,11 @@ export class Agenda {
 
     listarContactos(): Contacto[] {
     return [...this.contactos];
+    }
+
+    eliminarContacto(direccion: string): boolean {
+    const cantidadAntes = this.contactos.length;
+    this.contactos = this.contactos.filter(contacto => contacto.direccion !== direccion);
+    return this.contactos.length < cantidadAntes;
 }
 }   

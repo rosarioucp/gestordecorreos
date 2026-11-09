@@ -38,5 +38,12 @@ describe("Agenda", () =>{
     agenda.agregarContacto(new Contacto("Sofia", "sofia@gmail.com"));
     agenda.listarContactos().push(new Contacto("Laura", "laura@gmail.com"));
     expect(agenda.listarContactos()).toHaveLength(1);
-});
+    });
+    
+    it("elimina un contacto por su direccion", () => {
+    const agenda = new Agenda();
+    agenda.agregarContacto(new Contacto("Sofia", "sofia@gmail.com"));
+    expect(agenda.eliminarContacto("sofia@gmail.com")).toBe(true);
+    expect(agenda.buscarContacto("sofia@gmail.com")).toBeUndefined();
+    });
 });
