@@ -27,6 +27,16 @@ describe("Agenda", () =>{
     expect(agenda.buscarContacto("pedro@gmail.com")).toBeUndefined();
     });
 
+    it("rechaza un contacto con una direccion que ya existe", () => {
+    const agenda = new Agenda();
+    agenda.agregarContacto(new Contacto("Sofia", "sofia@gmail.com"));
+    expect(() => agenda.agregarContacto(new Contacto("Laura", "sofia@gmail.com"))).toThrow();
+    });
 
-
+    it("devuelve una copia de la lista de contactos", () => {
+    const agenda = new Agenda();
+    agenda.agregarContacto(new Contacto("Sofia", "sofia@gmail.com"));
+    agenda.listarContactos().push(new Contacto("Laura", "laura@gmail.com"));
+    expect(agenda.listarContactos()).toHaveLength(1);
+});
 });
