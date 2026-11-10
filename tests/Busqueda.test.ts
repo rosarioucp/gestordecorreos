@@ -15,9 +15,20 @@ describe("Busqueda", () => {
 
     it("encuentra un correo aunque busque en mayuscula", () => {
         const belen = new Contacto("Belen", "belen@ucp.edu.ar");
-        const correo1 = new Correo(belen, "Parcial del viernes", "Temas:..");
-        const correos = [correo1];
+        const correo = new Correo(belen, "Parcial del viernes", "Temas:..");
+        const correos = [correo];
         const resultado = buscarCorreos(correos, "PARC");
-        expect(resultado).toEqual([correo1]);
+        expect(resultado).toEqual([correo]);
     });
+
+    it("encuentra un correo por su cuerpo", () => {
+    const belen = new Contacto("Belen", "belen@ucp.edu.ar");
+    const correo = new Correo(belen, "Aviso", "Hay que entregar el sprint 1");
+    const correos = [correo];
+    const resultado = buscarCorreos(correos, "entregar");
+    expect(resultado).toEqual([correo]);
+    });
+
+    
+
 });

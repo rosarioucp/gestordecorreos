@@ -1,5 +1,7 @@
 import {Correo} from "./Correo";
 
 export function buscarCorreos(correos: Correo[], texto: string): Correo[] {
-    return correos.filter(correo => correo.asunto.toLowerCase().includes(texto.toLowerCase()));
+    const buscado = texto.toLowerCase();
+    return correos.filter(correo => correo.asunto.toLowerCase().includes(buscado) || 
+    correo.cuerpo.toLowerCase().includes(buscado));
 }
