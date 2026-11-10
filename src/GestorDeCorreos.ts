@@ -3,10 +3,10 @@ import { Correo } from "./Correo";
 import { ValidadorEnvio } from "./ValidadorEnvio";
 
 export class GestorDeCorreos {
-  private readonly _entrada = new Bandeja("Entrada");
+  private _entrada = new Bandeja("Entrada");
   private _borradores = new Bandeja("Borradores");
   private _enviados = new Bandeja("Enviados");
-  private readonly _validadorEnvio = new ValidadorEnvio();
+  private _validadorEnvio = new ValidadorEnvio();
 
   recibirCorreo(correo: Correo): void {
     this._entrada.agregar(correo);
