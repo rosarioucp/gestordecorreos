@@ -5,30 +5,36 @@ import {buscarCorreos} from "../src/Busqueda";
 
 describe("Busqueda", () => {
     it("encuentra un correo por su asunto", () => {
-        const belen = new Contacto("Belen", "belen@ucp.edu.ar");
-        const correo1 = new Correo(belen, "Parcial del viernes", "Temas:..");
-        const correo2 = new Correo(belen, "Cumpleaños", "El 21 de noviembre");
+        const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
+        const correo1 = new Correo(sofia, "Parcial del viernes", "Temas:..");
+        const correo2 = new Correo(sofia, "Cumpleaños", "El 21 de noviembre");
         const correos = [correo1, correo2];
         const resultado = buscarCorreos(correos, "Parcial");
         expect(resultado).toEqual([correo1]);
     });
 
     it("encuentra un correo aunque busque en mayuscula", () => {
-        const belen = new Contacto("Belen", "belen@ucp.edu.ar");
-        const correo = new Correo(belen, "Parcial del viernes", "Temas:..");
+        const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
+        const correo = new Correo(sofia, "Parcial del viernes", "Temas:..");
         const correos = [correo];
         const resultado = buscarCorreos(correos, "PARC");
         expect(resultado).toEqual([correo]);
     });
 
     it("encuentra un correo por su cuerpo", () => {
-    const belen = new Contacto("Belen", "belen@ucp.edu.ar");
-    const correo = new Correo(belen, "Aviso", "Hay que entregar el sprint 1");
+    const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
+    const correo = new Correo(sofia, "Aviso", "Hay que entregar el sprint 1");
     const correos = [correo];
     const resultado = buscarCorreos(correos, "entregar");
     expect(resultado).toEqual([correo]);
     });
 
-    
+    it("encuentra un correo por el nombre o la direccion del remitente", () => {
+    const sofia = new Contacto("Sofia", "gomez@ucp.edu.ar");
+    const correo = new Correo(sofia, "Saludo", "Hola");
+    const correos = [correo];
+    expect(buscarCorreos(correos, "sofia")).toEqual([correo]);
+    expect(buscarCorreos(correos, "gomez")).toEqual([correo]);
+    });
 
 });
