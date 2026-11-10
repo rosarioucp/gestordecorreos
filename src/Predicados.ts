@@ -7,3 +7,8 @@ export function asuntoContiene(texto: string) {
 export function cuerpoContiene(texto: string) {
     return (correo: Correo) => correo.cuerpo.toLowerCase().includes(texto.toLowerCase());
 }
+
+export function enviadoPor (direccion: string){
+    return (correo: Correo) => correo.remitente?.direccion === direccion.trim().toLowerCase();
+}
+

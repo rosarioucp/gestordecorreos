@@ -1,7 +1,7 @@
 import {describe, it, expect} from "vitest";
 import {Contacto} from "../src/Contacto";
 import {Correo} from "../src/Correo";
-import {asuntoContiene, cuerpoContiene} from "../src/Predicados";
+import {asuntoContiene, cuerpoContiene, enviadoPor} from "../src/Predicados";
 
 describe("Predicados", () => {
     it("el asunto tiene el texto que se busca", () => {
@@ -21,8 +21,15 @@ describe("Predicados", () => {
         expect (tieneMes(correo1)).toBe(true);
         expect (tieneMes(correo2)).toBe(false);
     });
-
-
+    it("el corre lo mando esta persona", () => {
+    const laura = new Contacto("Laura", "laura@ucp.edu.ar");
+    const juan = new Contacto("Juan", "juan@ucp.edu.ar");
+    const correo1 = new Correo(laura, "Hola", "Texto");
+    const correo2= new Correo(juan, "Hola", "Texto");
+    const envioLaura = enviadoPor ("laura@ucp.edu.ar");
+    expect(envioLaura(correo1)).toBe(true);
+    expect(envioLaura(correo2)).toBe(false);
+    });
 
 
 
