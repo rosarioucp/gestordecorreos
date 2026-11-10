@@ -12,3 +12,7 @@ export function enviadoPor (direccion: string){
     return (correo: Correo) => correo.remitente?.direccion === direccion.trim().toLowerCase();
 }
 
+export function recibidoPor (direccion:string){
+    const buscada = direccion.trim().toLowerCase();
+    return (correo: Correo) => correo.verDestinatarios().some(destinatario => destinatario.direccion === buscada);
+}
