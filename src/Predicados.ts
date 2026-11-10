@@ -18,3 +18,7 @@ export function recibidoPor (direccion:string):Predicado {
     const buscada = direccion.trim().toLowerCase();
     return (correo: Correo) => correo.verDestinatarios().some(destinatario => destinatario.direccion === buscada);
 }
+
+export function y(predicado1: Predicado, predicado2: Predicado): Predicado {
+    return (correo: Correo) => predicado1(correo) && predicado2(correo);
+}

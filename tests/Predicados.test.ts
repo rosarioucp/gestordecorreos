@@ -1,7 +1,7 @@
 import {describe, it, expect} from "vitest";
 import {Contacto} from "../src/Contacto";
 import {Correo} from "../src/Correo";
-import {asuntoContiene, cuerpoContiene, enviadoPor, recibidoPor, y} from "../src/Predicados";
+import {asuntoContiene, cuerpoContiene, enviadoPor, recibidoPor, y, o} from "../src/Predicados";
 
 describe("Predicados", () => {
 //busca el correo por una palabra en el asunto//
@@ -70,4 +70,21 @@ describe("Combinadores", () => {
         expect(parcialYdeLiliana(cumpleLiliana)).toBe(false);
 
     });
+
+//combinador o//
+    it("el combinador o responde true si se cumple al menos uno de los predicados", () => {
+         const liliana = new Contacto("Liliana", "lili@ucp.edu.ar");
+        const diego = new Contacto("Diego", "diego@ucp.edu.ar");
+
+        const invitacion = new Correo(liliana, "Cumpleaños", "El 28 en casa");
+        const regalo = new Correo(diego, "Llevar", "comprar el regalo");
+        const parcial = new Correo(liliana, "Parcial", "El sabado");
+
+        const cumpleORegalo = o(asuntoContiene("cumpleaños"), cuerpoContiene("regalo"));
+
+        expect(cumpleORegalo(invitacion)).toBe(true);
+        expect(cumpleORegalo(regalo)).toBe(true);
+        expect(cumpleORegalo(parcial)).toBe(false);
+    });
+
 });
