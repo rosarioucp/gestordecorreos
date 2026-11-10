@@ -36,15 +36,20 @@ describe("Predicados", () => {
         const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
         const laura = new Contacto("Laura", "laura@gmail.com");
         const juan = new Contacto("Juan", "juan@gmail.com");
-        const correo1 = new Correo(laura, "Entrega", "Sprint 3")
-        const correo2 = new Correo(laura, "Cuota", "Vence el 10")
+        const correo1 = new Correo(laura, "Entrega", "Sprint 3");
+        const correo2 = new Correo(sofia, "Cuota", "Vence el 10");
         
         correo1.agregarDestinatario(sofia);
         correo2.agregarDestinatario(juan);
-        const recibeSofia = recibidoPor ("sofia@gmail.com");
-        
+        correo2.agregarDestinatario(laura);
+        const recibeSofia = recibidoPor ("sofia@ucp.edu.ar");
+        const destino1= recibidoPor ("juan@gmail.com");
+        const destino2= recibidoPor ("laura@gmail.com");
+
         expect(recibeSofia(correo1)).toBe(true);
         expect(recibeSofia(correo2)).toBe(false);
+        expect(destino1(correo2)).toBe(true);
+        expect(destino2 (correo2)).toBe(true);
     });
 
 
