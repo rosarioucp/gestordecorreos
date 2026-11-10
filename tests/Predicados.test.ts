@@ -1,7 +1,7 @@
 import {describe, it, expect} from "vitest";
 import {Contacto} from "../src/Contacto";
 import {Correo} from "../src/Correo";
-import {asuntoContiene, cuerpoContiene, enviadoPor, recibidoPor, y, o} from "../src/Predicados";
+import {asuntoContiene, cuerpoContiene, enviadoPor, recibidoPor, y, o,no} from "../src/Predicados";
 
 describe("Predicados", () => {
 //busca el correo por una palabra en el asunto//
@@ -86,5 +86,19 @@ describe("Combinadores", () => {
         expect(cumpleORegalo(regalo)).toBe(true);
         expect(cumpleORegalo(parcial)).toBe(false);
     });
+
+//combinador not//
+    it("el combinador no invierte el resultado del predicado", () => {
+        const liliana = new Contacto("Liliana", "lili@ucp.edu.ar");
+        const diego = new Contacto("Diego", "diego@ucp.edu.ar");
+
+        const deLiliana = new Correo(liliana, "Cumpleaños", "El 28 en casa");
+        const deDiego = new Correo(diego, "Llevar", "comprar el regalo");
+
+        const noEnvioLiliana = no(enviadoPor("lili@ucp.edu.ar"));
+
+        expect(noEnvioLiliana(deLiliana)).toBe(false);
+        expect(noEnvioLiliana(deDiego)).toBe(true);
+});
 
 });
