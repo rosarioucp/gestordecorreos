@@ -1,6 +1,7 @@
 import { Correo } from "./Correo";
+import type { IBandeja } from "./IBandeja";
 
-export class Bandeja {
+export class Bandeja implements IBandeja {
   readonly nombre: string;
   private _correos: Correo[] = [];
 
