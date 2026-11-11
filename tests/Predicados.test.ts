@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { Contacto } from "../src/Contacto";
 import { Correo } from "../src/Correo";
-import { asuntoContiene, cuerpoContiene, enviadoPor, recibidoPor, y, o, no, enviadoDesde } from "../src/Predicados";
+import { asuntoContiene, cuerpoContiene, enviadoPor, recibidoPor, y, o, no, enviadoDesde, esLeido, esFavorito } from "../src/Predicados";
 
 describe("Predicados", () => {
     //busca el correo por una palabra en el asunto//
