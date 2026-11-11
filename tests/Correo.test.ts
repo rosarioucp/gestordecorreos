@@ -73,14 +73,14 @@ describe("Correo", () => {
   it("se puede marcar como leido", () => {
     const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
     const correo = new Correo(sofia, "Saludo", "Hola,como estas");
-    correo.marcarComoLeido();
+    correo.marcarLeido();
     expect(correo.leido).toBe(true);
   });
 
    it("se puede marcar como favorito", () => {
     const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
     const correo = new Correo(sofia, "Saludo", "Hola,como estas");
-    correo.marcarComoFavorito();
+    correo.marcarFavorito();
     expect(correo.favorito).toBe(true);
   });
 

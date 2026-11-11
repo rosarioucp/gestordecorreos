@@ -35,11 +35,11 @@ export class Correo {
     return this._favorito;
   }
 
-  marcarComoLeido(): void {
+  marcarLeido(): void {
     this._leido = true;
   }
 
-  marcarComoFavorito(): void {
+  marcarFavorito(): void {
     this._favorito = true;
   }
 }
