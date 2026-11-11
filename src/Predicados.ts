@@ -2,6 +2,7 @@ import {Correo} from "./Correo";
 
 export type Predicado = (correo: Correo) => boolean;
 
+//predicados simples//
 export function asuntoContiene(texto: string):Predicado {
     return (correo: Correo) => correo.asunto.toLowerCase().includes(texto.toLowerCase());
 }
@@ -19,6 +20,16 @@ export function recibidoPor (direccion:string):Predicado {
     return (correo: Correo) => correo.verDestinatarios().some(destinatario => destinatario.direccion === buscada);
 }
 
+//combinadores y, o, not//
+
 export function y(predicado1: Predicado, predicado2: Predicado): Predicado {
     return (correo: Correo) => predicado1(correo) && predicado2(correo);
+}
+
+export function o(predicado1: Predicado, predicado2: Predicado): Predicado {
+    return (correo: Correo) => predicado1(correo) || predicado2(correo);
+}
+
+export function no(predicado: Predicado): Predicado {
+    return (correo: Correo) => !predicado(correo);
 }
