@@ -9,7 +9,6 @@ describe("Filtros", () => {
         const milagros = new Contacto("Milagros", "mila@gmail.com");
         const notas = new Correo(milagros, "Excel", "Notas del parcial");
         const finales = new Correo(milagros, "final", "la primer mesa es el 1");
-
         const filtroNotas = new Filtro("NotasFinales", asuntoContiene("Excel"));
         expect(filtroNotas.nombre).toBe("NotasFinales");
         expect(filtroNotas.aplicar([notas, finales])).toEqual([notas]);

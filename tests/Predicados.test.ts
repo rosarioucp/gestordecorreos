@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { Contacto } from "../src/Contacto";
 import { Correo } from "../src/Correo";
-import { asuntoContiene, cuerpoContiene, enviadoPor, recibidoPor, y, o, no } from "../src/Predicados";
+import { asuntoContiene, cuerpoContiene, enviadoPor, recibidoPor, y, o, no, enviadoDesde } from "../src/Predicados";
 
 describe("Predicados", () => {
     //busca el correo por una palabra en el asunto//
@@ -62,9 +62,7 @@ describe("Combinadores", () => {
         const parcialLiliana = new Correo(liliana, "Parcial", "El sabado");
         const parcialDiego = new Correo(diego, "Parcial", "El sabado");
         const cumpleLiliana = new Correo(liliana, "Cumpleaños", "El 28");
-
         const parcialYdeLiliana = y(asuntoContiene("parcial"), enviadoPor("lili@ucp.edu.ar"));
-
         expect(parcialYdeLiliana(parcialLiliana)).toBe(true);
         expect(parcialYdeLiliana(parcialDiego)).toBe(false);
         expect(parcialYdeLiliana(cumpleLiliana)).toBe(false);
@@ -75,13 +73,10 @@ describe("Combinadores", () => {
     it("el combinador o responde true si se cumple al menos uno de los predicados", () => {
         const liliana = new Contacto("Liliana", "lili@ucp.edu.ar");
         const diego = new Contacto("Diego", "diego@ucp.edu.ar");
-
         const invitacion = new Correo(liliana, "Cumpleaños", "El 28 en casa");
         const regalo = new Correo(diego, "Llevar", "comprar el regalo");
         const parcial = new Correo(liliana, "Parcial", "El sabado");
-
         const cumpleORegalo = o(asuntoContiene("cumpleaños"), cuerpoContiene("regalo"));
-
         expect(cumpleORegalo(invitacion)).toBe(true);
         expect(cumpleORegalo(regalo)).toBe(true);
         expect(cumpleORegalo(parcial)).toBe(false);
@@ -91,14 +86,41 @@ describe("Combinadores", () => {
     it("el combinador no invierte el resultado del predicado", () => {
         const liliana = new Contacto("Liliana", "lili@ucp.edu.ar");
         const diego = new Contacto("Diego", "diego@ucp.edu.ar");
-
         const deLiliana = new Correo(liliana, "Cumpleaños", "El 28 en casa");
         const deDiego = new Correo(diego, "Llevar", "comprar el regalo");
-
         const noEnvioLiliana = no(enviadoPor("lili@ucp.edu.ar"));
-
         expect(noEnvioLiliana(deLiliana)).toBe(false);
         expect(noEnvioLiliana(deDiego)).toBe(true);
     });
 
+
+    it("enviadoDesde responde si el remitente es de ese dominio", () => {
+        const liliana = new Contacto("Liliana", "lili@ucp.edu.ar");
+        const juan = new Contacto("Juan", "juan@gmail.com");
+        const deLiliana = new Correo(liliana, "Hola", "Texto");
+        const deJuan = new Correo(juan, "Hola", "Texto");
+        const esDeLaUcp = enviadoDesde("@ucp.edu.ar");
+        expect(esDeLaUcp(deLiliana)).toBe(true);
+        expect(esDeLaUcp(deJuan)).toBe(false);
+    });
+
+    it("esLeido responde si el correo esta leido", () => {
+        const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
+        const leido = new Correo(sofia, "Hola", "Texto");
+        const noLeido = new Correo(sofia, "Hola", "Texto");
+        leido.marcarLeido();
+        const estaLeido = esLeido();
+        expect(estaLeido(leido)).toBe(true);
+        expect(estaLeido(noLeido)).toBe(false);
+    });
+
+    it("esFavorito responde si el correo es favorito", () => {
+        const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
+        const favorito = new Correo(sofia, "Hola", "Texto");
+        const comun = new Correo(sofia, "Hola", "Texto");
+        favorito.marcarFavorito();
+        const esUnFavorito = esFavorito();
+        expect(esUnFavorito(favorito)).toBe(true);
+        expect(esUnFavorito(comun)).toBe(false);
+    });
 });

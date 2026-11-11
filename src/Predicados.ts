@@ -1,7 +1,6 @@
 import { Correo } from "./Correo";
 
 export type Predicado = (correo: Correo) => boolean;
-
 //predicados simples//
 export function asuntoContiene(texto: string): Predicado {
     return (correo: Correo) => correo.asunto.toLowerCase().includes(texto.toLowerCase());
@@ -32,4 +31,16 @@ export function o(predicado1: Predicado, predicado2: Predicado): Predicado {
 
 export function no(predicado: Predicado): Predicado {
     return (correo: Correo) => !predicado(correo);
+}
+
+export function enviadoDesde(dominio: string): Predicado {
+    return (correo: Correo) => correo.remitente?.direccion.endsWith(dominio.toLowerCase()) ?? false;
+}
+
+export function esLeido(): Predicado {
+    return (correo: Correo) => correo.leido;
+}
+
+export function esFavorito(): Predicado {
+    return (correo: Correo) => correo.favorito;
 }
