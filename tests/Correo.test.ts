@@ -69,4 +69,20 @@ describe("Correo", () => {
 
     expect(correo.verDestinatarios()).toEqual([belen]);
   });
+
+  it("se puede marcar como leido", () => {
+    const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
+    const correo = new Correo(sofia, "Saludo", "Hola,como estas");
+    correo.marcarComoLeido();
+    expect(correo.leido).toBe(true);
+  });
+
+   it("se puede marcar como favorito", () => {
+    const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
+    const correo = new Correo(sofia, "Saludo", "Hola,como estas");
+    correo.marcarComoFavorito();
+    expect(correo.favorito).toBe(true);
+  });
+
+
 });
