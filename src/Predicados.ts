@@ -20,7 +20,7 @@ export function recibidoPor(direccion: string): Predicado {
     return (correo: Correo) => correo.verDestinatarios().some(destinatario => destinatario.direccion === buscada);
 }
 
-//combinadores y, o, not//
+//operadores and, or, not//
 
 export function y(predicado1: Predicado, predicado2: Predicado): Predicado {
     return (correo: Correo) => predicado1(correo) && predicado2(correo);

@@ -55,7 +55,7 @@ describe("Predicados", () => {
 });
 
 describe("Combinadores", () => {
-    //combinador y//
+    //operador y//
     it("el combinador y responde true solo si se cumplen los dos predicados", () => {
         const liliana = new Contacto("Liliana", "lili@ucp.edu.ar");
         const diego = new Contacto("Diego", "diego@ucp.edu.ar");
@@ -71,7 +71,7 @@ describe("Combinadores", () => {
 
     });
 
-    //combinador o//
+    //operador o//
     it("el combinador o responde true si se cumple al menos uno de los predicados", () => {
         const liliana = new Contacto("Liliana", "lili@ucp.edu.ar");
         const diego = new Contacto("Diego", "diego@ucp.edu.ar");
@@ -87,7 +87,7 @@ describe("Combinadores", () => {
         expect(cumpleORegalo(parcial)).toBe(false);
     });
 
-    //combinador not//
+    //operador not//
     it("el combinador no invierte el resultado del predicado", () => {
         const liliana = new Contacto("Liliana", "lili@ucp.edu.ar");
         const diego = new Contacto("Diego", "diego@ucp.edu.ar");
