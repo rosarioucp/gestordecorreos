@@ -3,6 +3,19 @@ import { Contacto } from "../src/Contacto";
 import { Correo } from "../src/Correo";
 
 describe("Correo", () => {
+  it("Permite quitar un destinatario conservando los otros", () => {
+    const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const belen = new Contacto("Belén", "belen@ucp.edu.ar");
+    const ian = new Contacto("Ian", "ian@ucp.edu.ar");
+    const correo = new Correo(remitente, "Consulta", "Estudiamos?");
+    correo.agregarDestinatario(belen);
+    correo.agregarDestinatario(ian);
+
+    correo.quitarDestinatario(belen);
+
+    expect(correo.verDestinatarios()).toEqual([ian]);
+  });
+
   it("Permite cambiar asunto y cuerpo conservando su identidad", () => {
     const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
     const correo = new Correo(remitente, "", "");
