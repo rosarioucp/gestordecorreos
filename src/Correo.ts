@@ -39,6 +39,12 @@ export class Correo {
     !existe && this._destinatarios.push(contacto);
   }
 
+  quitarDestinatario(contacto: Contacto): void {
+    this._destinatarios = this._destinatarios.filter(
+      guardado => guardado.direccion !== contacto.direccion
+    );
+  }
+
   verDestinatarios(): Contacto[] {
     return [...this._destinatarios];
   }
