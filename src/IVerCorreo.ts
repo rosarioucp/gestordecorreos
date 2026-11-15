@@ -1,3 +1,5 @@
+import type { Contacto } from "./Contacto";
+
 export interface IVerCorreo {
     readonly asunto: string;
     readonly cuerpo: string;
