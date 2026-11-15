@@ -1,9 +1,20 @@
 import {describe, it, expect} from "vitest";
 import {Contacto} from "../src/Contacto";
 import {Correo} from "../src/Correo";
-import {buscarCorreos} from "../src/Busqueda";
+import {buscarCorreos, buscarCorreoPorId} from "../src/Busqueda";
 
 describe("Busqueda", () => {
+    it("encuentra el correo por su id aunque los datos sean iguales", () => {
+        const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+        const primero = new Correo(remitente, "Consulta", "Estudiamos?");
+        const segundo = new Correo(remitente, "Consulta", "Estudiamos?");
+        const correos = [primero, segundo];
+
+        const encontrado = buscarCorreoPorId(correos, segundo.id);
+
+        expect(encontrado).toBe(segundo);
+    });
+
     it("encuentra un correo por su asunto", () => {
         const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
         const correo1 = new Correo(sofia, "Parcial del viernes", "Temas:..");
