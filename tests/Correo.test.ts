@@ -3,6 +3,19 @@ import { Contacto } from "../src/Contacto";
 import { Correo } from "../src/Correo";
 
 describe("Correo", () => {
+  it("Permite cambiar asunto y cuerpo conservando su identidad", () => {
+    const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const correo = new Correo(remitente, "", "");
+    const idOriginal = correo.id;
+
+    correo.cambiarAsunto("Consulta");
+    correo.cambiarCuerpo("Pinta juntarnos a estudiar?");
+
+    expect(correo.id).toBe(idOriginal);
+    expect(correo.asunto).toBe("Consulta");
+    expect(correo.cuerpo).toBe("Pinta juntarnos a estudiar?");
+  });
+
   it("Se inicializa correctamente y conserva sus datos", () => {
     const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
     const destinatario = new Contacto("Belén", "belen@ucp.edu.ar");
