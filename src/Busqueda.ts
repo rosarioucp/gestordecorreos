@@ -1,5 +1,9 @@
 import {Correo} from "./Correo";
 
+export function buscarCorreoPorId(correos: Correo[], id: number): Correo | undefined {
+    return correos.find(correo => correo.id === id);
+}
+
 export function buscarCorreos(correos: Correo[], texto: string): Correo[] {
     const buscado = texto.toLowerCase();
     return correos.filter(correo =>
