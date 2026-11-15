@@ -4,8 +4,8 @@ export class Correo {
   private static _siguienteId = 1;
 
   readonly remitente: Contacto | undefined;
-  readonly asunto: string;
-  readonly cuerpo: string;
+  private _asunto: string;
+  private _cuerpo: string;
   private _id: number;
   private _destinatarios: Contacto[] = [];
   private _leido = false;
@@ -14,8 +14,24 @@ export class Correo {
   constructor(remitente: Contacto | undefined, asunto: string, cuerpo: string) {
     this._id = Correo._siguienteId++;
     this.remitente = remitente;
-    this.asunto = asunto;
-    this.cuerpo = cuerpo;
+    this._asunto = asunto;
+    this._cuerpo = cuerpo;
+  }
+
+  get asunto(): string {
+    return this._asunto;
+  }
+
+  get cuerpo(): string {
+    return this._cuerpo;
+  }
+
+  cambiarAsunto(asunto: string): void {
+    this._asunto = asunto;
+  }
+
+  cambiarCuerpo(cuerpo: string): void {
+    this._cuerpo = cuerpo;
   }
 
   agregarDestinatario(contacto: Contacto): void {
@@ -54,5 +70,3 @@ export class Correo {
     return copia;
   }
 }
-
-
