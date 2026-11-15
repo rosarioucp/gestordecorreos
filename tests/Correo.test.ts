@@ -86,5 +86,19 @@ describe("Correo", () => {
     expect(correo.favorito).toBe(true);
   });
 
+  it("Se puede  copiar un correo con los mismos datos pero es otro objeto con su propio estado", () => {
+    const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const belen = new Contacto("Belén", "belen@ucp.edu.ar");
+    const original = new Correo(remitente, "Consulta", "Que entra en la prueba?");
+    original.agregarDestinatario(belen);
 
+    const copia = original.copiar();
+    copia.marcarLeido();
+
+    expect(copia).not.toBe(original);
+    expect(copia.id).toBe(original.id);
+    expect(copia.asunto).toBe("Consulta");
+    expect(copia.verDestinatarios()).toEqual([belen]);
+    expect(original.leido).toBe(false);
+  });
 });
