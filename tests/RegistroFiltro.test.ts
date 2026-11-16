@@ -1,5 +1,5 @@
 import {describe, it, expect} from "vitest";
-import {RegistroFiltros} from "../src/RegistroFiltros";
+import {RegistroFiltros} from "../src/RegistroFiltro";
 import {Filtro} from "../src/Filtro";
 import {asuntoContiene} from "../src/Predicados";
 import {correosDeLaUcp, academicosImportantes, noLeidosEntrega, correosPrioritarios, seguimientoEventos} from "../src/FiltrosPredefinidos";
