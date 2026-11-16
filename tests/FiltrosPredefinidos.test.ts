@@ -1,7 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { Contacto } from "../src/Contacto";
 import { Correo } from "../src/Correo";
-import { correosDeLaUcp, academicosImportantes, noLeidosEntrega, correosPrioritarios, seguimientoEventos } from "../src/FiltrosPredefinidos";
+import { correosDeLaUcp, academicosImportantes, noLeidosEntrega, correosPrioritarios, seguimientoEventos, noLeidos } from "../src/FiltrosPredefinidos";
+import { GestorDeCorreos } from "../src/GestorDeCorreos";
 
 describe("Filtros complejos", () => {
     //test correo desde la ucp//
@@ -62,6 +63,21 @@ describe("Filtros complejos", () => {
         const filtro = seguimientoEventos();
         expect(filtro.aplicar([proyectoSinLeer, reunionSinLeer, proyectoLeido, cumpleSinLeer]))
             .toEqual([proyectoSinLeer, reunionSinLeer]);
+    });
+
+    it("noLeidos obtiene los no leidos de una bandeja y refleja los cambios", () => {
+        const gestor = new GestorDeCorreos();
+        const liliana = new Contacto("Liliana", "lili@ucp.edu.ar");
+        const correo1 = new Correo(liliana, "Parcial", "El sabado");
+        const correo2 = new Correo(liliana, "Aviso", "No hay clase");
+        gestor.recibirCorreo(correo1);
+        gestor.recibirCorreo(correo2);
+        const filtro = noLeidos();
+        expect(filtro.aplicar(gestor.verEntrada())).toEqual([correo1, correo2]);
+        correo1.marcarLeido();
+        expect(filtro.aplicar(gestor.verEntrada())).toEqual([correo2]);
+        correo1.marcarNOLeido();
+        expect(filtro.aplicar(gestor.verEntrada())).toEqual([correo1, correo2]);
     });
 
 }); 

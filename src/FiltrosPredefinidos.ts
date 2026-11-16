@@ -6,6 +6,10 @@ export function correosDeLaUcp(): Filtro {
     return new Filtro("Correos de la UCP", enviadoDesde("@ucp.edu.ar"));
 }
 
+export function noLeidos(): Filtro {
+    return new Filtro("No leidos", no(esLeido()));
+}
+
 //filtros complejos//
 //combina el dominio y el asunto//
 export function academicosImportantes(): Filtro {
