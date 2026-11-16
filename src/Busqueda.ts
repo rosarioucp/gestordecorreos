@@ -1,4 +1,4 @@
-import {Correo} from "./Correo";
+import { Correo } from "./Correo";
 
 export function buscarCorreoPorId(correos: Correo[], id: number): Correo | undefined {
     return correos.find(correo => correo.id === id);
@@ -7,13 +7,14 @@ export function buscarCorreoPorId(correos: Correo[], id: number): Correo | undef
 export function buscarCorreos(correos: Correo[], texto: string): Correo[] {
     const buscado = texto.toLowerCase();
     return correos.filter(correo =>
-        correo.asunto.toLowerCase().includes(buscado) || 
-        correo.cuerpo.toLowerCase().includes(buscado)||
-        correo.remitente?.nombre.toLowerCase().includes(buscado)||
-        correo.remitente?.direccion.toLowerCase().includes(buscado)||
+        correo.asunto.toLowerCase().includes(buscado) ||
+        correo.cuerpo.toLowerCase().includes(buscado) ||
+        correo.remitente?.nombre.toLowerCase().includes(buscado) ||
+        correo.remitente?.direccion.toLowerCase().includes(buscado) ||
         correo.verDestinatarios().some(destinatario =>
-          destinatario.nombre.toLowerCase().includes(buscado)||
-         destinatario.direccion.toLowerCase().includes(buscado))
+            destinatario.nombre.toLowerCase().includes(buscado) ||
+            destinatario.direccion.toLowerCase().includes(buscado))
     );
 }
+
 
