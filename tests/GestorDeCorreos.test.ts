@@ -93,4 +93,42 @@ describe("GestorDeCorreos", () => {
     expect(gestor.verEnviados()).toEqual([correo]);
     expect(gestor.verBorradores()).toEqual([]);
   });
+
+  it("Elimina un correo de Entrada y lo mueve a Eliminados", () => {
+    const gestor = new GestorDeCorreos();
+    const belen = new Contacto("Belén", "belen@ucp.edu.ar");
+    const fabricio = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const correo = new Correo(belen, "Parcial del viernes", "Que entra en el parcial?");
+    correo.agregarDestinatario(fabricio);
+    gestor.recibirCorreo(correo);
+
+    gestor.eliminar(correo);
+
+    expect(gestor.verEntrada()).toEqual([]);
+    expect(gestor.verEliminados()).toEqual([correo]);
+  });
+
+  it("Restaura un correo eliminado a su bandeja de origen", () => {
+    const gestor = new GestorDeCorreos();
+    const belen = new Contacto("Belén", "belen@ucp.edu.ar");
+    const fabricio = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const correo = new Correo(belen, "Parcial del viernes", "Que entra en el parcial?");
+    correo.agregarDestinatario(fabricio);
+    gestor.recibirCorreo(correo);
+    gestor.eliminar(correo);
+
+    gestor.restaurar(correo);
+
+    expect(gestor.verEntrada()).toEqual([correo]);
+    expect(gestor.verEliminados()).toEqual([]);
+  });
+
+  it("No permite eliminar un correo que no esta en ninguna bandeja ni restaurar uno no eliminado", () => {
+    const gestor = new GestorDeCorreos();
+    const belen = new Contacto("Belén", "belen@ucp.edu.ar");
+    const correo = new Correo(belen, "Parcial del viernes", "Que entra en el parcial?");
+
+    expect(() => gestor.eliminar(correo)).toThrow("El correo no esta en ninguna bandeja");
+    expect(() => gestor.restaurar(correo)).toThrow("El correo no esta en Eliminados");
+  });
 });
