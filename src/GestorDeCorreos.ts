@@ -1,5 +1,6 @@
 import { Bandeja } from "./Bandeja";
 import { Correo } from "./Correo";
+import { EditorDeBorradores } from "./EditorDeBorradores";
 import { Papelera } from "./Papelera";
 import { Validacion } from "./Validacion";
 import { ValidadorEnvio } from "./ValidadorEnvio";
@@ -10,6 +11,7 @@ export class GestorDeCorreos {
   private _enviados = new Bandeja("Enviados");
   private _validadorEnvio = new ValidadorEnvio();
   private _papelera = new Papelera();
+  readonly editor = new EditorDeBorradores(this._borradores);
 
   recibirCorreo(correo: Correo): void {
     this._entrada.agregar(correo);
