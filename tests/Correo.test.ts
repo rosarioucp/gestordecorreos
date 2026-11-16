@@ -127,4 +127,17 @@ describe("Correo", () => {
     expect(copia.verDestinatarios()).toEqual([belen]);
     expect(original.leido).toBe(false);
   });
+
+  //desmarcar favorito un correo//
+  it("se puede desmarcar como favorito", () => {
+    const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
+    const correo = new Correo(sofia, "Saludo", "Hola");
+    correo.marcarFavorito();
+
+    correo.desmarcarFavorito();
+
+    expect(correo.favorito).toBe(false);
 });
+});
+
+

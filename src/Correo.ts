@@ -52,7 +52,7 @@ export class Correo {
   get id(): number {
     return this._id;
   }
-  
+
   get leido(): boolean {
     return this._leido;
   }
@@ -69,10 +69,15 @@ export class Correo {
     this._favorito = true;
   }
 
+  desmarcarFavorito(): void {
+    this._favorito = false;
+  }
   copiar(): Correo {
     const copia = new Correo(this.remitente, this.asunto, this.cuerpo);
     copia._id = this._id;
     copia._destinatarios = [...this._destinatarios];
     return copia;
   }
+
+
 }
