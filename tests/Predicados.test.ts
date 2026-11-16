@@ -13,6 +13,7 @@ describe("Predicados", () => {
         expect(tieneExamen(correo1)).toBe(true);
         expect(tieneExamen(correo2)).toBe(false);
     });
+
     //busca el correo por una palabra en el cuerpo//
     it("el cuerpo tiene el texto que se busca", () => {
         const juan = new Contacto("Juan", "juan@ucp.edu.ar");
@@ -22,6 +23,7 @@ describe("Predicados", () => {
         expect(tieneMes(correo1)).toBe(true);
         expect(tieneMes(correo2)).toBe(false);
     });
+
     //busca el correo por la persona que lo mando//
     it("el correo lo mando esta persona", () => {
         const laura = new Contacto("Laura", "laura@ucp.edu.ar");
@@ -32,6 +34,7 @@ describe("Predicados", () => {
         expect(envioLaura(correo1)).toBe(true);
         expect(envioLaura(correo2)).toBe(false);
     });
+    
     //busca el correo por la persona que lo recibio//
     it("el correo lo recibio esta persona", () => {
         const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
@@ -99,9 +102,9 @@ describe("Combinadores", () => {
         const juan = new Contacto("Juan", "juan@gmail.com");
         const deLiliana = new Correo(liliana, "Hola", "Texto");
         const deJuan = new Correo(juan, "Hola", "Texto");
-        const esDeLaUcp = enviadoDesde("@ucp.edu.ar");
-        expect(esDeLaUcp(deLiliana)).toBe(true);
-        expect(esDeLaUcp(deJuan)).toBe(false);
+        const desdeUcp = enviadoDesde("@ucp.edu.ar");
+        expect(desdeUcp(deLiliana)).toBe(true);
+        expect(desdeUcp(deJuan)).toBe(false);
     });
 
     it("esLeido responde si el correo esta leido", () => {
