@@ -65,6 +65,10 @@ export class Correo {
     this._leido = true;
   }
 
+  marcarNOLeido(): void {
+    this._leido = false;
+  }
+
   marcarFavorito(): void {
     this._favorito = true;
   }

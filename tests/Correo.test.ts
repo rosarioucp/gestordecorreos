@@ -104,7 +104,7 @@ describe("Correo", () => {
     expect(correo.leido).toBe(true);
   });
 
-   it("se puede marcar como favorito", () => {
+  it("se puede marcar como favorito", () => {
     const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
     const correo = new Correo(sofia, "Saludo", "Hola,como estas");
     expect(correo.favorito).toBe(false);
@@ -133,11 +133,17 @@ describe("Correo", () => {
     const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
     const correo = new Correo(sofia, "Saludo", "Hola");
     correo.marcarFavorito();
-
     correo.desmarcarFavorito();
-
     expect(correo.favorito).toBe(false);
-});
+  });
+
+  it("se puede volver a marcar como no leido", () => {
+    const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
+    const correo = new Correo(sofia, "Saludo", "Hola");
+    correo.marcarLeido();
+    correo.marcarNOLeido();
+    expect(correo.leido).toBe(false);
+  });
 });
 
 
