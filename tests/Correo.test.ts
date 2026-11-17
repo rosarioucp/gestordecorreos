@@ -141,7 +141,7 @@ describe("Correo", () => {
     const sofia = new Contacto("Sofia", "sofia@ucp.edu.ar");
     const correo = new Correo(sofia, "Saludo", "Hola");
     correo.marcarLeido();
-    correo.marcarNOLeido();
+    correo.marcarNoLeido();
     expect(correo.leido).toBe(false);
   });
 });
