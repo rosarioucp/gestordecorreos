@@ -6,8 +6,6 @@ Tener instalado Node.js versión 20 o superior y Git.
 ## Instalación
 Clonar el repositorio:
 git clone https://github.com/rosarioucp/gestordecorreos.git
-Entrar a la carpeta del proyecto:
-
 ## Instalar las dependencias:
 npm install
 ## Ejecutar los tests
