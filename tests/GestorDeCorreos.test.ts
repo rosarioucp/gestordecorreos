@@ -94,6 +94,25 @@ describe("GestorDeCorreos", () => {
     expect(gestor.verBorradores()).toEqual([]);
   });
 
+  it("Rechaza reenviar o guardar como borrador un correo que esta en Eliminados", () => {
+    const gestor = new GestorDeCorreos();
+    const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const belen = new Contacto("Belén", "belen@ucp.edu.ar");
+    const correo = new Correo(remitente, "Consulta", "Estudiamos?");
+    correo.agregarDestinatario(belen);
+    gestor.enviar(correo);
+    gestor.eliminar(correo);
+
+    expect(() => gestor.enviar(correo))
+      .toThrow("El correo esta en Eliminados");
+    expect(() => gestor.guardarBorrador(correo))
+      .toThrow("El correo esta en Eliminados");
+
+    expect(gestor.verEnviados()).toEqual([]);
+    expect(gestor.verBorradores()).toEqual([]);
+    expect(gestor.verEliminados()).toEqual([correo]);
+  });
+
   it("Elimina un correo de Entrada y lo mueve a Eliminados", () => {
     const gestor = new GestorDeCorreos();
     const belen = new Contacto("Belén", "belen@ucp.edu.ar");
