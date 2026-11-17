@@ -3,9 +3,8 @@ import {Validacion} from "./Validacion";
 export class Agenda {
     private _contactos: Contacto[] = [];
 
-
    agregarContacto(contacto: Contacto): void {
-    const yaExiste = this._contactos.some(c => c.mismoContacto(contacto));
+    const yaExiste = this._contactos.some(guardado => guardado.mismoContacto(contacto));
     Validacion.validar(!yaExiste, "Ya existe un contacto con esa direccion");
     this._contactos.push(contacto);
     }
@@ -27,12 +26,9 @@ export class Agenda {
     modificarContacto(direccionActual: string, nuevoNombre: string, nuevaDireccion: string): void {
     const existe = this.buscarContacto(direccionActual) !== undefined;
     Validacion.validar(existe, "No existe un contacto con esa direccion");
-
     const nuevo = new Contacto(nuevoNombre, nuevaDireccion);
-
-    const ocupada = this._contactos.some(c => c.mismoContacto(nuevo) && c.direccion !== direccionActual);
+    const ocupada = this._contactos.some(guardado => guardado.mismoContacto(nuevo) && guardado.direccion !== direccionActual);
     Validacion.validar(!ocupada, "Ya existe otro contacto con esa direccion");
-
     this.eliminarContacto(direccionActual);
     this._contactos.push(nuevo);
     }   

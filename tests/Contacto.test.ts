@@ -17,22 +17,20 @@ describe("Contacto", () => {
 
     //contacto con direccion invalida//
     it("rechazar un contacto con direccion invalida", () => {
-        const crearSinArroba = () => new Contacto("Sofia", " Sofia.gmail.com ");
-        const crearSinPunto = () => new Contacto("Sofia", " Sofia@gmailcom ");
-
-        expect(crearSinArroba).toThrow();
-        expect(crearSinPunto).toThrow();
+        const contacto1 = () => new Contacto("Sofia", " Sofia.gmail.com ");
+        const contacto2 = () => new Contacto("Sofia", " Sofia@gmailcom ");
+        expect(contacto1).toThrow();
+        expect(contacto2).toThrow();
     });
 
     //contacto con nombre vacio//
     it("rechazar un contacto con nombre vacio", () => {
-        const crearSinNombre = () => new Contacto("", "sofia@gmail.com");
-        const crearConEspacios = () => new Contacto("  ", "sofia@gmail.com");
-
-        expect(crearSinNombre).toThrow();
-        expect(crearConEspacios).toThrow();
+        const contacto1= () => new Contacto("", "sofia@gmail.com");
+        const contacto2 = () => new Contacto("  ", "sofia@gmail.com");
+        expect(contacto1).toThrow();
+        expect(contacto2).toThrow();
     });
-    
+
     //creacion de 2 contactos con las mismas direcciones //
     it("Compara dos contactos con la misma direccion", () => {
         const contacto1 = new Contacto("Sofia", "sofia@gmail.com");

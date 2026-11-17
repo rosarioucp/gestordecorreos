@@ -1,4 +1,3 @@
-import { Correo } from "./Correo";
 import type { IVerCorreo } from "./IVerCorreo";
 
 export type Predicado = (correo: IVerCorreo) => boolean;
@@ -45,4 +44,5 @@ export function o(predicado1: Predicado, predicado2: Predicado): Predicado {
 export function no(predicado: Predicado): Predicado {
     return (correo: IVerCorreo) => !predicado(correo);
 }
+
 

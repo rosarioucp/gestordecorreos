@@ -16,7 +16,7 @@ export function academicosImportantes(): Filtro {
     return new Filtro("Correos academicos importantes", y(enviadoDesde("@ucp.edu.ar"), asuntoContiene("examen")));
 }
 
-//combina si se leyo y el cuerpo del correo//
+//combina si no se leyo y el cuerpo del correo//
 export function noLeidosEntrega (): Filtro {
     return new Filtro("Correos no leidos sobre entregas", y(no(esLeido()), cuerpoContiene("entrega")));
 }
