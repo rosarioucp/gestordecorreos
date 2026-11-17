@@ -4,6 +4,42 @@ import { Correo } from "../src/Correo";
 import { ServidorDeCorreo } from "../src/ServidorDeCorreo";
 
 describe("ServidorDeCorreo", () => {
+  it("Redacta un borrador, lo envia a varios destinatarios y elimina solo una copia", () => {
+    const servidor = new ServidorDeCorreo();
+    const fabricio = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const belen = new Contacto("Belén", "belen@ucp.edu.ar");
+    const ian = new Contacto("Ian", "ian@ucp.edu.ar");
+
+    const gestorFabricio = servidor.registrar(fabricio);
+    const gestorBelen = servidor.registrar(belen);
+    const gestorIan = servidor.registrar(ian);
+
+    const borrador = gestorFabricio.editor.redactar(fabricio);
+    expect(gestorFabricio.verBorradores()).toEqual([borrador]);
+
+    gestorFabricio.editor.cambiarAsunto(borrador.id, "Parcial");
+    gestorFabricio.editor.cambiarCuerpo(borrador.id, "Es el viernes");
+    gestorFabricio.editor.agregarDestinatario(borrador.id, belen);
+    gestorFabricio.editor.agregarDestinatario(borrador.id, ian);
+
+    servidor.enviar(borrador);
+
+    const recibidoBelen = gestorBelen.verEntrada()[0]!;
+    const recibidoIan = gestorIan.verEntrada()[0]!;
+
+    expect(gestorFabricio.verBorradores()).toEqual([]);
+    expect(gestorFabricio.verEnviados()).toEqual([borrador]);
+    expect(recibidoBelen.id).toBe(borrador.id);
+    expect(recibidoIan.id).toBe(borrador.id);
+
+    gestorBelen.eliminar(recibidoBelen);
+
+    expect(gestorBelen.verEntrada()).toEqual([]);
+    expect(gestorBelen.verEliminados()).toEqual([recibidoBelen]);
+    expect(gestorIan.verEntrada()).toEqual([recibidoIan]);
+    expect(gestorFabricio.verEnviados()).toEqual([borrador]);
+  });
+
   it("Envia un correo y queda en Enviados del remitente y en Entrada de cada destinatario", () => {
     const servidor = new ServidorDeCorreo();
     const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
