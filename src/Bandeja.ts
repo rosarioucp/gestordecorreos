@@ -14,11 +14,11 @@ export class Bandeja implements IBandeja {
   }
 
   contiene(correo: Correo): boolean {
-    return this._correos.some(guardado => guardado.id === correo.id);
+    return this._correos.some(guardado => guardado === correo);
   }
 
   quitar(correo: Correo): void {
-    this._correos = this._correos.filter(guardado => guardado.id !== correo.id);
+    this._correos = this._correos.filter(guardado => guardado !== correo);
   }
 
   verCorreos(): Correo[] {

@@ -12,7 +12,7 @@ export class Papelera implements IBandeja {
   }
 
   contiene(correo: Correo): boolean {
-    return this._eliminados.some(guardado => guardado.correo.id === correo.id);
+    return this._eliminados.some(guardado => guardado.correo === correo);
   }
 
   verCorreos(): Correo[] {
@@ -21,13 +21,13 @@ export class Papelera implements IBandeja {
 
   quitar(correo: Correo): void {
     this._eliminados = this._eliminados.filter(
-      guardado => guardado.correo.id !== correo.id
+      guardado => guardado.correo !== correo
     );
   }
 
   buscarOrigen(correo: Correo): Bandeja | undefined {
     const guardado = this._eliminados.find(
-      eliminado => eliminado.correo.id === correo.id
+      eliminado => eliminado.correo === correo
     );
 
     return guardado?.origen;

@@ -18,14 +18,18 @@ export class GestorDeCorreos {
   }
 
   guardarBorrador(correo: Correo): void {
-    Validacion.validar(!this._papelera.contiene(correo), "El correo esta en Eliminados");
-    this._validadorEnvio.ValidarFueEnviado(this._enviados.contiene(correo));
+    const estaEliminado = this._papelera.verCorreos().some(guardado => guardado.id === correo.id);
+    const fueEnviado = this._enviados.verCorreos().some(guardado => guardado.id === correo.id);
+    Validacion.validar(!estaEliminado, "El correo esta en Eliminados");
+    this._validadorEnvio.ValidarFueEnviado(fueEnviado);
     this._borradores.agregar(correo);
   }
 
   enviar(correo: Correo): void {
-    Validacion.validar(!this._papelera.contiene(correo), "El correo esta en Eliminados");
-    this._validadorEnvio.ValidarFueEnviado(this._enviados.contiene(correo));
+    const estaEliminado = this._papelera.verCorreos().some(guardado => guardado.id === correo.id);
+    const fueEnviado = this._enviados.verCorreos().some(guardado => guardado.id === correo.id);
+    Validacion.validar(!estaEliminado, "El correo esta en Eliminados");
+    this._validadorEnvio.ValidarFueEnviado(fueEnviado);
     this._validadorEnvio.validarDatosEnvio(correo);
     this._borradores.quitar(correo);
     this._enviados.agregar(correo);
