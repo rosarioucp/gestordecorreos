@@ -18,11 +18,13 @@ export class GestorDeCorreos {
   }
 
   guardarBorrador(correo: Correo): void {
+    Validacion.validar(!this._papelera.contiene(correo), "El correo esta en Eliminados");
     this._validadorEnvio.ValidarFueEnviado(this._enviados.contiene(correo));
     this._borradores.agregar(correo);
   }
 
   enviar(correo: Correo): void {
+    Validacion.validar(!this._papelera.contiene(correo), "El correo esta en Eliminados");
     this._validadorEnvio.ValidarFueEnviado(this._enviados.contiene(correo));
     this._validadorEnvio.validarDatosEnvio(correo);
     this._borradores.quitar(correo);
