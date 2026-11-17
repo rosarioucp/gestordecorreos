@@ -8,3 +8,4 @@ export interface IVerCorreo {
     readonly favorito: boolean;
     verDestinatarios(): Contacto[];
 }
+

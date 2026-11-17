@@ -1,6 +1,7 @@
 import { Contacto } from "./Contacto";
+import type { IVerCorreo } from "./IVerCorreo";
 
-export class Correo {
+export class Correo implements IVerCorreo {
   private static _siguienteId = 1;
 
   readonly remitente: Contacto | undefined;
