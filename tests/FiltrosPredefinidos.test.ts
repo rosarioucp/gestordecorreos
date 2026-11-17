@@ -76,7 +76,7 @@ describe("Filtros complejos", () => {
         expect(filtro.aplicar(gestor.verEntrada())).toEqual([correo1, correo2]);
         correo1.marcarLeido();
         expect(filtro.aplicar(gestor.verEntrada())).toEqual([correo2]);
-        correo1.marcarNOLeido();
+        correo1.marcarNoLeido();
         expect(filtro.aplicar(gestor.verEntrada())).toEqual([correo1, correo2]);
     });
 
