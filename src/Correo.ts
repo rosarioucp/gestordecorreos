@@ -66,7 +66,7 @@ export class Correo implements IVerCorreo {
     this._leido = true;
   }
 
-  marcarNOLeido(): void {
+  marcarNoLeido(): void {
     this._leido = false;
   }
 
