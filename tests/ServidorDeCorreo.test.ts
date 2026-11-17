@@ -84,6 +84,60 @@ describe("ServidorDeCorreo", () => {
     expect(enviado.leido).toBe(false);
   });
 
+  it("Al enviarse a uno mismo, elimina el original sin quitar la copia de Entrada", () => {
+    const servidor = new ServidorDeCorreo();
+    const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const gestor = servidor.registrar(remitente);
+    const correo = new Correo(remitente, "Recordatorio", "Estudiar para el coloquio");
+    correo.agregarDestinatario(remitente);
+    servidor.enviar(correo);
+
+    const copia = gestor.verEntrada()[0]!;
+    expect(copia.id).toBe(correo.id);
+    expect(copia).not.toBe(correo);
+    expect(() => servidor.enviar(copia)).toThrow("El correo ya fue enviado");
+
+    gestor.eliminar(correo);
+
+    expect(gestor.verEnviados()).toEqual([]);
+    expect(gestor.verEntrada()[0]).toBe(copia);
+    expect(gestor.verEliminados()[0]).toBe(correo);
+    expect(() => servidor.enviar(copia)).toThrow("El correo esta en Eliminados");
+  });
+
+  it("Elimina y restaura las dos copias del envio a uno mismo en sus bandejas de origen", () => {
+    const servidor = new ServidorDeCorreo();
+    const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
+    const gestor = servidor.registrar(remitente);
+    const correo = new Correo(remitente, "Recordatorio", "Estudiar para el coloquio");
+    correo.agregarDestinatario(remitente);
+    servidor.enviar(correo);
+
+    const copia = gestor.verEntrada()[0]!;
+    copia.marcarLeido();
+    correo.marcarFavorito();
+
+    gestor.eliminar(copia);
+    gestor.eliminar(correo);
+
+    expect(gestor.verEntrada()).toEqual([]);
+    expect(gestor.verEnviados()).toEqual([]);
+    expect(gestor.verEliminados()[0]).toBe(copia);
+    expect(gestor.verEliminados()[1]).toBe(correo);
+
+    gestor.restaurar(correo);
+    expect(gestor.verEnviados()[0]).toBe(correo);
+    expect(gestor.verEliminados()[0]).toBe(copia);
+
+    gestor.restaurar(copia);
+    expect(gestor.verEntrada()[0]).toBe(copia);
+    expect(gestor.verEliminados()).toEqual([]);
+    expect(copia.leido).toBe(true);
+    expect(correo.leido).toBe(false);
+    expect(correo.favorito).toBe(true);
+    expect(copia.favorito).toBe(false);
+  });
+
   it("Rechaza todo el envio si un destinatario no esta registrado", () => {
     const servidor = new ServidorDeCorreo();
     const remitente = new Contacto("Fabricio", "fabricio@ucp.edu.ar");
