@@ -3,7 +3,7 @@ export class Validacion {
         condicion || Validacion.generarError(mensaje);
 
     }
-//revisar este metodo si pongo never  o void//
+    
     private static generarError (mensaje:string):never{
          throw new Error(mensaje);
     }
