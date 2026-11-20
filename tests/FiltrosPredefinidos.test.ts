@@ -52,7 +52,7 @@ describe("Filtros complejos", () => {
         expect(filtro.aplicar([correoLiliana1, correoDiego1, correoLiliana2])).toEqual([correoLiliana1]);
     });
 
-    it("paraSeguimiento encuentra los no leidos sobre proyectos o reuniones", () => {
+    it("para Seguimiento encuentra los no leidos sobre proyectos o reuniones", () => {
         const liliana = new Contacto("Liliana", "lili@ucp.edu.ar");
 
         const proyectoSinLeer = new Correo(liliana, "Proyecto final", "Avances");
